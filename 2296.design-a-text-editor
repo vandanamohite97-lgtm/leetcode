@@ -1,0 +1,32 @@
+class TextEditor {
+    StringBuilder left = new StringBuilder();
+    StringBuilder right = new StringBuilder();
+
+    public TextEditor() {}
+
+    public void addText(String text) {
+        left.append(text);
+    }
+
+    public int deleteText(int k) {
+        int n = Math.min(k, left.length());
+        left.delete(left.length() - n, left.length());
+        return n;
+    }
+
+    public String cursorLeft(int k) {
+        while (k-- > 0 && left.length() > 0) {
+            right.append(left.charAt(left.length() - 1));
+            left.deleteCharAt(left.length() - 1);
+        }
+        return left.substring(Math.max(0, left.length() - 10));
+    }
+
+    public String cursorRight(int k) {
+        while (k-- > 0 && right.length() > 0) {
+            left.append(right.charAt(right.length() - 1));
+            right.deleteCharAt(right.length() - 1);
+        }
+        return left.substring(Math.max(0, left.length() - 10));
+    }
+}
